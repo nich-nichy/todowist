@@ -39,7 +39,9 @@ export default function AddItemScreen({ route, navigation }: Props) {
         keyboardType="number-pad"
         style={styles.input}
       />
-
+ <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
+        <Text style={styles.saveText}>Save</Text>
+      </Pressable>
       <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
         <Text style={styles.saveText}>Save</Text>
       </Pressable>
