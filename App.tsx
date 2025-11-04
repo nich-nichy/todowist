@@ -1,20 +1,27 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import ListsScreen from './src/screens/ListsScreen';
+import ListDetailScreen from './src/screens/ListDetailScreen';
+import AddItemScreen from './src/screens/AddItemScreen';
+
+export type RootStackParamList = {
+  Lists: undefined;
+  ListDetail: { listId: string };
+  AddItem: { listId: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar style="dark" />
+      <Stack.Navigator>
+        <Stack.Screen name="Lists" component={ListsScreen} options={{ title: 'Shop Lists' }} />
+        <Stack.Screen name="ListDetail" component={ListDetailScreen} options={{ title: 'List' }} />
+        <Stack.Screen name="AddItem" component={AddItemScreen} options={{ title: 'Add Item' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
