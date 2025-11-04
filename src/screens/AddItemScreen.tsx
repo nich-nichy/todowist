@@ -11,8 +11,8 @@ export default function AddItemScreen({ route, navigation }: Props) {
   const addItem = useShopStore((s) => s.addItem);
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('1');
-
-  const canSave = name.trim().length > 0 && Number(quantity) > 0;
+                                                                                                
+  const canSave = name.trim().length > 0 && Number(quantity) > 0;                                     
 
   const onSave = () => {
     if (!canSave) return;
@@ -39,15 +39,6 @@ export default function AddItemScreen({ route, navigation }: Props) {
         keyboardType="number-pad"
         style={styles.input}
       />
-      <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
-        <Text style={styles.saveText}>Save</Text>
-      </Pressable>
-      <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
-        <Text style={styles.saveText}>Save</Text>
-      </Pressable>
- <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
-        <Text style={styles.saveText}>Save</Text>
-      </Pressable>
       <Pressable onPress={onSave} style={[styles.saveBtn, !canSave && styles.saveBtnDisabled]} disabled={!canSave}>
         <Text style={styles.saveText}>Save</Text>
       </Pressable>

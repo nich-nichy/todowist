@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { nanoid } from 'nanoid/non-secure';
+// Simple ID generator to avoid bundling issues with nanoid on web
+const generateId = () =>
+  Math.random().toString(36).slice(2, 10) + '-' + Date.now().toString(36);
 
 export type ShopItem = {
   id: string;
@@ -33,7 +35,7 @@ export const useShopStore = create<ShopState>()(
         set((state) => ({
           lists: [
             ...state.lists,
-            { id: nanoid(), name: `List ${state.lists.length + 1}`, items: [] },
+        { id: generateId(), name: `List ${state.lists.length + 1}`, items: [] },
           ],
         })),
       removeList: (listId) => set((state) => ({ lists: state.lists.filter((l) => l.id !== listId) })),
@@ -45,7 +47,7 @@ export const useShopStore = create<ShopState>()(
                   ...l,
                   items: [
                     ...l.items,
-                    { id: nanoid(), name, quantity, checked: false },
+                { id: generateId(), name, quantity, checked: false },
                   ],
                 }
               : l
